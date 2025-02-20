@@ -6,7 +6,7 @@ export default function HomeScreen() {
 
     return (
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-            <Text>📰 Home Feed</Text>
+            <Text>📰 Home Feedddd</Text>
             <Button title="Go to Add Post" onPress={() => router.push("/addPost")} />
         </View>
     );
