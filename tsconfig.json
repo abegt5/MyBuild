@@ -12,6 +12,15 @@
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
+    "expo-env.d.ts",
+    "src/app.js",
+    "src/app/(tabs)/Home.js",
+    "src/app/Onboarding.js",
+    "src/app/(tabs)/AddPost.js",
+    "src/app/(tabs)/Account.js",
+    "src/profile.js",
+    "src/app/(tabs)/Events.js",
+    "src/config/firebaseConfig.js",
+    "nativewind-env.d.ts"
   ]
 }
