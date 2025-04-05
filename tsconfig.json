@@ -2,10 +2,9 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
+    "baseUrl": "./",
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"]
     }
   },
   "include": [
@@ -14,7 +13,7 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "src/app.js",
-    "src/app/(tabs)/Home.js",
+    "src/app/(tabs)/Edit.js",
     "src/app/Onboarding.js",
     "src/app/(tabs)/AddPost.js",
     "src/app/(tabs)/Account.js",

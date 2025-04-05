@@ -1,20 +1,29 @@
 import { Tabs } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { TouchableOpacity } from "react-native";
+import { useRouter } from "expo-router";
 
 export default function TabsLayout() {
+  const router = useRouter();
   return (
     <Tabs
       screenOptions={{
         tabBarStyle: {
           backgroundColor: "#000", // black background
-          bottom: 10,
-          alignSelf: "center",
+          position: "absolute", // ensures tab bar stays at the bottom
+          bottom: 10, // align to the bottom of the screen
           borderRadius: 20,
-          height: "10%",
-          width: "95%",
+          borderCurve: "continuous",
+          height: 60, // Fixed height for consistency
+          width: "90%",
+          marginHorizontal: "5%", // Centers the tab bar with 5% margin on each side
+          elevation: 0, // Remove Android shadow
+          shadowOpacity: 0, // Remove shadow opacity
+          shadowOffset: { width: 0, height: 0 }, // Remove shadow offset
+          shadowRadius: 0, // Remove shadow radius
         },
-        tabBarActiveTintColor: "#fff", // Set the active tab color
+        tabBarActiveTintColor: "#69AFF5", // Set the active tab color
         tabBarInactiveTintColor: "#888", // Set the inactive tab color
         tabBarLabelStyle: {
           fontSize: 12,
@@ -27,9 +36,21 @@ export default function TabsLayout() {
       }}
     >
       <Tabs.Screen
-        name="Home"
+        name="Feed"
         options={{
-          title: "Home",
+          title: "Explore Feed",
+          headerRight: () => (
+            <TouchableOpacity
+              onPress={() => router.push("/messages/Messages")}
+              style={{ marginRight: 10 }}
+            >
+              <MaterialCommunityIcons
+                name="message-outline"
+                size={24}
+                color="black"
+              />
+            </TouchableOpacity>
+          ),
           tabBarIcon: ({ color }) => (
             <Ionicons name="car-sport-outline" size={24} color={color} />
           ),
