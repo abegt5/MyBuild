@@ -8,7 +8,7 @@ export default function PostListItem({ post }) {
   return (
     <View className="">
       {/*Header*/}
-      <View className="p-2 flex-row items-center gap-2 ">
+      <View className="p-2 flex-row items-center gap-2 border-t border-b-hairline border-gray-200 bg-white " >
         <Image
           source={{ uri: post.user.image_url }}
           className="w-12 aspect-square rounded-full"

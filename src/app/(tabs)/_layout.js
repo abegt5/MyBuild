@@ -3,6 +3,12 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
+import { Dimensions } from "react-native";
+
+
+const screenWidth = Dimensions.get("window").width;
+const tabBarWidth = screenWidth * 0.9;
+
 
 export default function TabsLayout() {
   const router = useRouter();
@@ -12,16 +18,26 @@ export default function TabsLayout() {
         tabBarStyle: {
           backgroundColor: "#000", // black background
           position: "absolute", // ensures tab bar stays at the bottom
-          bottom: 10, // align to the bottom of the screen
-          borderRadius: 20,
+          bottom: 25, // align to the bottom of the screen
+          flexDirection: "row", // horizontal layout
+          justifyContent: "space-between", // space between items
+          marginHorizontal: "5%", // horizontal margin
+          paddingVertical: 15, // vertical padding
+          borderRadius: 25,
           borderCurve: "continuous",
-          height: 60, // Fixed height for consistency
-          width: "90%",
-          marginHorizontal: "5%", // Centers the tab bar with 5% margin on each side
+          height: 70, // Fixed height for consistency
+          //width: screenWidth * 0.9, // 90% of the screen width
+
+  
+          //paddingBottom: 5, // Add some padding at the bottom
+          borderTopWidth: 0, // Remove top border
+          borderBottomWidth: 0, // Remove bottom border
+          borderColor: "transparent", // Remove border color
+
           elevation: 0, // Remove Android shadow
-          shadowOpacity: 0, // Remove shadow opacity
-          shadowOffset: { width: 0, height: 0 }, // Remove shadow offset
-          shadowRadius: 0, // Remove shadow radius
+          shadowOpacity: 0.1, // Remove shadow opacity
+          shadowOffset: { width: 0, height: 10 }, // Remove shadow offset
+          shadowRadius: 10, // Remove shadow radius
         },
         tabBarActiveTintColor: "#69AFF5", // Set the active tab color
         tabBarInactiveTintColor: "#888", // Set the inactive tab color
@@ -38,7 +54,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="Feed"
         options={{
-          title: "Explore Feed",
+          title: "Feed",
           headerRight: () => (
             <TouchableOpacity
               onPress={() => router.push("/messages/Messages")}
