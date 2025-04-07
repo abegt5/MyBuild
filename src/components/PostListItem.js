@@ -3,12 +3,12 @@ import { useState } from "react";
 import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
 
 export default function PostListItem({ post }) {
-  // distruct post prop paqssed in
+  // destruct post prop passed in
   const [expanded, setExpanded] = useState(false); // State to track if the caption is expanded
   return (
     <View className="">
       {/*Header*/}
-      <View className="p-2 flex-row items-center gap-2 border-t border-b-hairline border-gray-200 bg-white " >
+      <View className="p-2 flex-row items-center gap-2 border-t border-b-hairline border-gray-200 bg-white "  >
         <Image
           source={{ uri: post.user.image_url }}
           className="w-12 aspect-square rounded-full"

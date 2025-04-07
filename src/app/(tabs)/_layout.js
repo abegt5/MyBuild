@@ -25,7 +25,7 @@ export default function TabsLayout() {
           paddingVertical: 15, // vertical padding
           borderRadius: 25,
           borderCurve: "continuous",
-          height: 70, // Fixed height for consistency
+          height: "10%", // Fixed height for consistency
           //width: screenWidth * 0.9, // 90% of the screen width
 
   
@@ -57,7 +57,7 @@ export default function TabsLayout() {
           title: "Feed",
           headerRight: () => (
             <TouchableOpacity
-              onPress={() => router.push("/messages/Messages")}
+              onPress={() => router.push("/msg/messages")}
               style={{ marginRight: 10 }}
             >
               <MaterialCommunityIcons
