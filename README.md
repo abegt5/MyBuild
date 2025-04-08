@@ -16,8 +16,8 @@ Account Page – Manage your profile and view your posts
 
 🛠️ Tech Stack
 
-React Native (Expo) – Cross-platform mobile development
-Firebase – Authentication, Firestore database, and real-time updates
-Cloudinary – Media hosting and optimization for images/videos
-Figma – UI/UX design and prototyping
-Git + GitHub – Version control and collaboration
+React Native (Expo) – Cross-platform mobile development  
+Firebase – Authentication, Firestore database, and real-time updates  
+Cloudinary – Media hosting and optimization for images/videos  
+Figma – UI/UX design and prototyping  
+Git + GitHub – Version control and collaboration  
