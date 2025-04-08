@@ -4,15 +4,12 @@ MyBuild is a mobile app for car enthusiasts to showcase their builds, discover m
 
 📱 Features
 
-Post Your Build – Share images and videos of your car and modifications
-
-Explore Feed – Browse a feed of community car builds and mods
-
-Events – Discover nearby car meets and shows
-
-Messaging – DM other users to talk cars, builds, or meetups
-
-Account Page – Manage your profile and view your posts
+Post Your Build – Share images and videos of your car and modifications  
+Explore Feed – Browse a feed of community car builds and mods  
+Events – Discover nearby car meets and shows  
+Marketplace – Buy and sell car parts with other enthusiasts  
+Messaging – DM other users to talk cars, builds, or meetups  
+Account Page – Manage your profile and view your posts  
 
 🛠️ Tech Stack
 
