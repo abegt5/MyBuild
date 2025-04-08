@@ -18,3 +18,13 @@ Firebase – Authentication, Firestore database, and real-time updates
 Cloudinary – Media hosting and optimization for images/videos  
 Figma – UI/UX design and prototyping  
 Git + GitHub – Version control and collaboration  
+
+🚀 Status
+
+Finished full Figma design  
+Implementing base functionality (Feed, Add Post, Events, Marketplace, Messaging, Account)  
+Testing with local community of car enthusiasts  
+
+About Me
+
+I'm a senior studying Computer Science at the University of Washington, passionate about cars, mobile development, and building software people love to use. I'm currently looking for new grad software engineering positions — feel free to check out my portfolio or reach out!
