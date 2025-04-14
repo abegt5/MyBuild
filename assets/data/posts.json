@@ -9,6 +9,11 @@
       "avatar_url": "samples/people/boy-snow-hoodie",
       "image_url": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/2.jpg",
       "username": "vadimnotjustdev"
+    },
+    "stats":{
+      "likes": 1234,
+      "comments": 12,
+      "shares": 5
     }
   },
   {
@@ -21,6 +26,11 @@
       "avatar_url": "samples/people/smiling-man",
       "image_url": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/2.jpg",
       "username": "badimnotjustdev"
+    },
+    "stats":{
+      "likes": 123,
+      "comments": 12,
+      "shares": 5
     }
   },
   {
@@ -33,6 +43,11 @@
       "avatar_url": "samples/bike",
       "image_url": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/3.jpg",
       "username": "vadimnotjustdev"
+    },
+    "stats":{
+      "likes": 123,
+      "comments": 12,
+      "shares": 5
     }
   },
   {
@@ -45,6 +60,11 @@
       "avatar_url": "samples/animals/cat",
       "image_url": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/4.jpg",
       "username": "vadimnotjustdev"
+    },
+    "stats":{
+      "likes": 0,
+      "comments": 0,
+      "shares": 0
     }
   }
 ]

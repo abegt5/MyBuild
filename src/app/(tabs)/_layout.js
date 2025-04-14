@@ -1,22 +1,26 @@
 import { Tabs } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { TouchableOpacity } from "react-native";
-import { useRouter } from "expo-router";
-import { Dimensions } from "react-native";
+import { TouchableOpacity, Text} from "react-native";
+import { useRouter, useSegments } from "expo-router";
 
 
-const screenWidth = Dimensions.get("window").width;
-const tabBarWidth = screenWidth * 0.9;
+
+
 
 
 export default function TabsLayout() {
+  const segments = useSegments();
+
+  // We can use this to conditionally render Feed/Explore titles
+  const isExplore = segments.includes("Explore");
+
   const router = useRouter();
   return (
     <Tabs
       screenOptions={{
         tabBarStyle: {
-          backgroundColor: "#000", // black background
+          backgroundColor: "black", // black background
           position: "absolute", // ensures tab bar stays at the bottom
           bottom: 25, // align to the bottom of the screen
           flexDirection: "row", // horizontal layout
@@ -49,12 +53,24 @@ export default function TabsLayout() {
           justifyContent: "center",
           alignItems: "center",
         },
+        // Customize header for each screen
+        headerStyle: {
+          backgroundColor: "black", // Set background color for the header
+          elevation: 0, // Remove shadow for iOS
+          shadowOpacity: 0, // Remove shadow
+        },
+        headerTitleStyle: {
+          color: "#fff", // White text color
+          fontSize: 18, // Set font size
+          fontWeight: "bold", // Set font weight to bold
+          fontFamily: "sans-serif", // Set font family
+        },
       }}
     >
       <Tabs.Screen
         name="Feed"
         options={{
-          title: "Feed",
+          title: isExplore ? "Explore" : "Garage",
           headerRight: () => (
             <TouchableOpacity
               onPress={() => router.push("/msg/messages")}
@@ -63,8 +79,20 @@ export default function TabsLayout() {
               <MaterialCommunityIcons
                 name="message-outline"
                 size={24}
-                color="black"
+                color="white"
               />
+            </TouchableOpacity>
+          ),
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() =>
+                router.push(isExplore ? "/Feed" : "/Explore")
+              }
+              style={{ marginLeft: 10 }}
+            >
+              <Text style={{ color: "#69AFF5", fontSize: 16 }}>
+                {isExplore ? "Feed" : "Explore"}
+              </Text>
             </TouchableOpacity>
           ),
           tabBarIcon: ({ color }) => (
@@ -72,6 +100,7 @@ export default function TabsLayout() {
           ),
         }}
       />
+      
       <Tabs.Screen
         name="AddPost"
         options={{
@@ -94,6 +123,18 @@ export default function TabsLayout() {
         name="Account"
         options={{
           title: "Account",
+          headerRight: () => (
+            <TouchableOpacity
+              onPress={() => router.push("/msg/messages")}
+              style={{ marginRight: 10 }}
+            >
+              <MaterialCommunityIcons
+                name="message-outline"
+                size={24}
+                color="white"
+              />
+            </TouchableOpacity>
+          ),
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
               name="account-outline"
