@@ -1,13 +1,8 @@
 import { Tabs } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { TouchableOpacity, Text} from "react-native";
+import { TouchableOpacity, Text } from "react-native";
 import { useRouter, useSegments } from "expo-router";
-
-
-
-
-
 
 export default function TabsLayout() {
   const segments = useSegments();
@@ -32,7 +27,6 @@ export default function TabsLayout() {
           height: "10%", // Fixed height for consistency
           //width: screenWidth * 0.9, // 90% of the screen width
 
-  
           //paddingBottom: 5, // Add some padding at the bottom
           borderTopWidth: 0, // Remove top border
           borderBottomWidth: 0, // Remove bottom border
@@ -70,6 +64,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="Feed"
         options={{
+          headerShown: false,
           title: isExplore ? "Explore" : "Garage",
           headerRight: () => (
             <TouchableOpacity
@@ -85,13 +80,17 @@ export default function TabsLayout() {
           ),
           headerLeft: () => (
             <TouchableOpacity
-              onPress={() =>
-                router.push(isExplore ? "/Feed" : "/Explore")
-              }
+              onPress={() => router.push(isExplore ? "/Feed" : "/Explore")}
               style={{ marginLeft: 10 }}
             >
-              <Text style={{ color: "#69AFF5", fontSize: 16 }}>
-                {isExplore ? "Feed" : "Explore"}
+              <Text
+                style={{
+                  color: "#69AFF5",
+                  fontSize: 16,
+                  fontFamily: "sans-serif",
+                }}
+              >
+                {isExplore ? "Garage" : "Explore"}
               </Text>
             </TouchableOpacity>
           ),
@@ -100,7 +99,7 @@ export default function TabsLayout() {
           ),
         }}
       />
-      
+
       <Tabs.Screen
         name="AddPost"
         options={{
