@@ -37,16 +37,19 @@ export default function FeedScreen() {
       {/* Display Full-Screen Story */}
       {selectedStory && (
         <View className="absolute inset-0 bg-black bg-opacity-80 justify-center items-center z-10">
-          <TouchableOpacity
-            onPress={closeStory}
-            className="absolute top-10 right-5 z-20"
-          >
-            <Text className="text-white text-3xl font-bold">Xxx</Text>
-          </TouchableOpacity>
-          <Image
-            source={{ uri: selectedStory.image_url }}
-            className="w-[90%] h-[80%] object-contain rounded-xl"
-          />
+        <TouchableOpacity
+  onPress={closeStory}
+  className="absolute inset-0 bg-black bg-opacity-80 justify-center items-center z-10"
+  activeOpacity={1}
+>
+  <Text className="text-white text-2xl font-bold mb-4">
+    {selectedStory.user.username}
+  </Text>
+  <Image
+    source={{ uri: selectedStory.image_url }}
+    className="w-[90%] h-[80%] object-contain rounded-xl"
+  />
+</TouchableOpacity>
         </View>
       )}
 
@@ -55,7 +58,7 @@ export default function FeedScreen() {
         <FlatList
           data={posts}
           renderItem={({ item }) => <PostListItem post={item} />}
-          contentContainerStyle={{ gap: 0, maxWidth: '100%' }}
+          contentContainerStyle={{ gap: 0, maxWidth: 512, width: '100%'}}
           showsVerticalScrollIndicator={false}
         />
       </View>
