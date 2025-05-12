@@ -10,6 +10,11 @@ export default function TabsLayout() {
   // We can use this to conditionally render Feed/Explore titles
   const isExplore = segments.includes("Explore");
 
+  const handleAddEvent = () => {
+    console.log("Add Event pressed");
+    // Navigate or open modal
+  };
+
   const router = useRouter();
   return (
     <Tabs
@@ -113,6 +118,12 @@ export default function TabsLayout() {
         name="Events"
         options={{
           title: "Events",
+          headerRight: () => (
+            <TouchableOpacity onPress={handleAddEvent}
+            style={{ marginRight: 10 }}>
+          <Ionicons name="add-circle-outline" size={37} color="white" />
+        </TouchableOpacity>
+          ),
           tabBarIcon: ({ color }) => (
             <Ionicons name="location-outline" size={24} color={color} />
           ),

@@ -1,49 +1,37 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, ImageBackground } from "react-native";
-import { format } from "date-fns"; // To format date (optional, for convenience)
+import { format } from "date-fns";
 
 const EventCard = ({ event }) => {
-  const [isJoined, setIsJoined] = useState(false); // Track if the user joined the event
-
-  // Format the date in MM/DD/YYYY HH:mm
+  const [isJoined, setIsJoined] = useState(false);
   const formattedDate = format(new Date(event.date), "MM/dd/yyyy HH:mm");
 
   return (
-    <ImageBackground
-      source={{ uri: event.backgroundImage }} // Event background image URL
-      style={{
-        width: "100%",
-        height: 200,
-        justifyContent: "flex-end",
-        position: "relative",
-      }}
-    >
-      {/* Transparent card on the bottom half */}
-      <View className="absolute bottom-0 w-full h-1/2 bg-black bg-opacity-50 p-4 flex-row items-center justify-between">
-        {/* Left side (Date and Location) */}
-        <View>
-          <Text className="text-white text-lg font-bold">{formattedDate}</Text>
-          <Text className="text-white text-sm">{event.location}</Text>
-        </View>
+    <View className="mb-4 shadow-md rounded-xl overflow-hidden">
+      <ImageBackground
+        source={{ uri: event.backgroundImage }}
+        className="w-full h-52 justify-end"
+        imageStyle={{ borderRadius: 12 }} // applies to the image inside the background
+      >
+        <View className="bg-white bg-opacity-50 p-3 flex-row items-center justify-between">
+          <View>
+            <Text className="text-black text-lg font-bold">{formattedDate}</Text>
+            <Text className="text-black text-sm">{event.location}</Text>
+          </View>
 
-        {/* Right side (Join Button) */}
-        <TouchableOpacity
-          onPress={() => setIsJoined(!isJoined)} // Toggle join status
-          style={{
-            backgroundColor: isJoined ? "#4CAF50" : "#2196F3", // Green if joined, blue if not
-            paddingVertical: 8,
-            paddingHorizontal: 16,
-            borderRadius: 25,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Text className="text-white font-semibold">
-            {isJoined ? "Joined" : "Join"}
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </ImageBackground>
+          <TouchableOpacity
+            onPress={() => setIsJoined(!isJoined)}
+            className={`px-4 py-2 rounded-full ${
+              isJoined ? "bg-green-600" : "bg-blue-600"
+            }`}
+          >
+            <Text className="text-white font-semibold">
+              {isJoined ? "Joined" : "Join"}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
+    </View>
   );
 };
 
