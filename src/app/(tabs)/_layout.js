@@ -19,6 +19,7 @@ export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{
+        tabBarHideOnKeyboard: true,
         tabBarStyle: {
           backgroundColor: "black", // black background
           position: "absolute", // ensures tab bar stays at the bottom

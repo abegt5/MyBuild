@@ -13,6 +13,8 @@ export default function FeedScreen() {
   const isExplore = segments.includes("Explore");
   const [selectedStory, setSelectedStory] = useState(null);
 
+  
+
   // Handle story click to show full-screen
   const handleStoryPress = (story) => {
     setSelectedStory(story);
@@ -24,6 +26,7 @@ export default function FeedScreen() {
   };
 
   return (
+    
     <View className="flex-1 bg-white">
       {/* Header */}
 
