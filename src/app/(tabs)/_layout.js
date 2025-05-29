@@ -84,22 +84,6 @@ export default function TabsLayout() {
               />
             </TouchableOpacity>
           ),
-          headerLeft: () => (
-            <TouchableOpacity
-              onPress={() => router.push(isExplore ? "/Feed" : "/Explore")}
-              style={{ marginLeft: 10 }}
-            >
-              <Text
-                style={{
-                  color: "#69AFF5",
-                  fontSize: 16,
-                  fontFamily: "sans-serif",
-                }}
-              >
-                {isExplore ? "Garage" : "Explore"}
-              </Text>
-            </TouchableOpacity>
-          ),
           tabBarIcon: ({ color }) => (
             <Ionicons name="car-sport-outline" size={24} color={color} />
           ),

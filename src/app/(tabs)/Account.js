@@ -5,6 +5,8 @@ import posts from "../../../assets/data/posts.json";
 import { useRouter } from "expo-router";
 import { auth } from '../../Firebase';
 import { TextInput } from 'react-native';
+import { SafeAreaView } from "react-native-safe-area-context";
+
 
 
 
@@ -19,7 +21,7 @@ const AddModForm = ({ mods, setMods }) => {
   };
 
   return (
-    <View className="flex-row items-center mt-2">
+    <View className="flex-row items-center mt-6">
       <TextInput
         value={input}
         onChangeText={setInput}
@@ -68,11 +70,12 @@ const ProfileScreen = () => {
   };
 
   return (
+    <SafeAreaView className="flex-1 bg-black">
     <Pressable
       style={{ flex: 1 }}
       onPress={() => dropdownVisible && setDropdownVisible(false)} // Close dropdown on outside press
     >
-      <ScrollView className="flex-1 bg-black px-4 pt-6">
+      <ScrollView className="flex-1 bg-black px-2 pt-4">
         {/* Header with Dropdown */}
         <View className="flex-row justify-between items-center mb-4">
           <Text className="color-secondary text-xl font-bold">abe</Text>
@@ -205,6 +208,7 @@ const ProfileScreen = () => {
 </View>
       </ScrollView>
     </Pressable>
+    </SafeAreaView>
   );
 };
 

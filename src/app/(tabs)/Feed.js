@@ -3,9 +3,11 @@ import { useState } from "react";
 import StoryListItem from "../../components/Story";
 import posts from "../../../assets/data/posts.json";
 import stories from "../../../assets/data/stories.json"; // Import stories data
-import PostListItem from "../../components/PostListItem";
+import PostListItem from "../../components/FeedPostListItem";
 import { useRouter, useSegments } from "expo-router";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 
 export default function FeedScreen() {
   const router = useRouter();
@@ -26,30 +28,38 @@ export default function FeedScreen() {
   };
 
   return (
-    
+    <SafeAreaView className="flex-1 bg-black">
+
     <View className="flex-1 bg-white">
       {/* Header */}
 
-      <View className="pt-6 pb-3 px-4 bg-black relative">
-        <View className="flex-row items-center justify-between">
-          {/* Left: Explore/Garage Button */}
-          <TouchableOpacity
-            onPress={() => router.push(isExplore ? "/Feed" : "/Explore")}
-          >
-            <Text className="text-blue-400 text-2xl font-bold">
-              {isExplore ? "Garage" : "Explore"}
-            </Text>
-          </TouchableOpacity>
+      <View className="px-2 bg-black relative">
+      <View className="relative flex-row items-center justify-between w-full px-3 mb-2">
+  {/* Centered Explore/Garage Button (absolute center) */}
+  <View className="absolute left-0 right-0 items-center">
+    <View className="bg-white/15 rounded-2xl px-4 py-2">
+      <TouchableOpacity
+        onPress={() => router.push(isExplore ? "/Feed" : "/Explore")}
+      >
+        <Text className="text-blue-400 text-2xl font-bold">
+          {isExplore ? "Garage" : "Explore"}
+        </Text>
+      </TouchableOpacity>
+    </View>
+  </View>
 
-          {/* Right: Messages Button */}
-          <TouchableOpacity onPress={() => router.push("/msg/messages")}>
-            <MaterialCommunityIcons
-              name="message-outline"
-              size={24}
-              color="white"
-            />
-          </TouchableOpacity>
-        </View>
+  {/* Right: Messages Button */}
+  <View className="ml-auto">
+    <TouchableOpacity onPress={() => router.push("/msg/messages")}>
+      <MaterialCommunityIcons
+        name="message-outline"
+        size={24}
+        color="white"
+      />
+    </TouchableOpacity>
+  </View>
+</View>
+
       </View>
 
       {/* Story Section */}
@@ -98,5 +108,6 @@ export default function FeedScreen() {
         />
       </View>
     </View>
+    </SafeAreaView>
   );
 }

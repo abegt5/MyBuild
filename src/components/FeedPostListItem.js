@@ -49,9 +49,11 @@ export default function PostListItem({ post }) {
       <View className="relative mb-3">
   {/* Post Image */}
   <Image
-    source={{ uri: post.image_url }}
-    className="w-full aspect-[4/3] rounded-xl"
-  />
+  source={{ uri: post.image_url }}
+  className="w-full aspect-square rounded-xl"
+  resizeMode="cover"
+/>
+
 
   {/* Post Icons */}
   <View className="absolute bottom-0 left-0 right-0 p-1 flex-row gap-4 bg-transparent justify-center "> 

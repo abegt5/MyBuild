@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 export default function StoryListItem({ story, onPress }) {
   return (
     <TouchableOpacity onPress={onPress}>
-      <View className="items-start ">
+      <View className="items-center ">
         {/* Story Image */}
         <Image
           source={{ uri: story.image_url }}
