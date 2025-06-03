@@ -9,14 +9,16 @@ const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <GestureHandlerRootView>
-      <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-      </Stack.Navigator>
-    </NavigationContainer>
-    </GestureHandlerRootView>
+    <StrictMode>
+      <GestureHandlerRootView>
+        <NavigationContainer>
+        <Stack.Navigator initialRouteName="Login">
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="SignUp" component={SignUp} />
+        </Stack.Navigator>
+      </NavigationContainer>
+      </GestureHandlerRootView>
+    </StrictMode>
     
   );
 };

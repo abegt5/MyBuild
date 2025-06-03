@@ -1,8 +1,11 @@
 import { Tabs } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { TouchableOpacity, Text } from "react-native";
+import { TouchableOpacity, Text, View } from "react-native";
 import { useRouter, useSegments } from "expo-router";
+import { ExploreFilterProvider } from '../../context/ExploreFilterContext';
+import { useExploreFilter } from '../../context/ExploreFilterContext';
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5"
 
 export default function TabsLayout() {
   const segments = useSegments();
@@ -14,23 +17,47 @@ export default function TabsLayout() {
     console.log("Add Event pressed");
     // Navigate or open modal
   };
+  function ExploreHeaderToggle() {
+  const { friendsOnly, setFriendsOnly } = useExploreFilter();
 
+  return (
+    <View className="flex-row justify-around items-center bg-white/15 rounded-2xl px-1 py-1">
+
+      <TouchableOpacity onPress={() => setFriendsOnly(false)} className="items-center mx-1">
+        <FontAwesome5
+          name="globe"
+          size={24}
+          color={!friendsOnly ? "#4C89D9" : "black"}
+        />
+      </TouchableOpacity>
+      
+      <TouchableOpacity onPress={() => setFriendsOnly(true)} className="items-center mx-1">
+        <FontAwesome5
+          name="user-friends"
+          size={24}
+          color={friendsOnly ? "#4C89D9" : "black"}
+        />
+      </TouchableOpacity>
+    </View>
+  );
+}
   const router = useRouter();
   return (
+        <ExploreFilterProvider>
     <Tabs
       screenOptions={{
         tabBarHideOnKeyboard: true,
         tabBarStyle: {
           backgroundColor: "black", // black background
           position: "absolute", // ensures tab bar stays at the bottom
-          bottom: 25, // align to the bottom of the screen
+          bottom: 17, // align to the bottom of the screen
           flexDirection: "row", // horizontal layout
           justifyContent: "space-between", // space between items
           marginHorizontal: "5%", // horizontal margin
           paddingVertical: 15, // vertical padding
           borderRadius: 25,
           borderCurve: "continuous",
-          height: "10%", // Fixed height for consistency
+          height: "8%", // Fixed height for consistency
           //width: screenWidth * 0.9, // 90% of the screen width
 
           //paddingBottom: 5, // Add some padding at the bottom
@@ -71,19 +98,7 @@ export default function TabsLayout() {
         name="Feed"
         options={{
           headerShown: false,
-          title: isExplore ? "Explore" : "Garage",
-          headerRight: () => (
-            <TouchableOpacity
-              onPress={() => router.push("/msg/messages")}
-              style={{ marginRight: 10 }}
-            >
-              <MaterialCommunityIcons
-                name="message-outline"
-                size={24}
-                color="white"
-              />
-            </TouchableOpacity>
-          ),
+          title: "Garage",
           tabBarIcon: ({ color }) => (
             <Ionicons name="car-sport-outline" size={24} color={color} />
           ),
@@ -99,6 +114,29 @@ export default function TabsLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+              name="Explore"
+              options={{
+                title: "Explore",
+                tabBarStyle: { display: 'none' },
+                headerShown: false,
+                tabBarIcon: ({ color }) => (
+                  <MaterialCommunityIcons name="go-kart-track" size={24} color={color} />
+                ),
+                headerRight: () => (
+                  <TouchableOpacity
+                          onPress={() => router.push('/Feed')}
+                          style={{ marginRight: 0 }}
+                        >
+                          <Text className= "text-blue-400 text-xl font-bold justify-around items-center bg-white/15 rounded-2xl px-2 py-1">
+                            Garage
+                          </Text>
+                        </TouchableOpacity>
+          ),
+          headerLeft: () => <ExploreHeaderToggle />,
+              }}
+            />
+
       <Tabs.Screen
         name="Events"
         options={{
@@ -118,6 +156,7 @@ export default function TabsLayout() {
         name="Account"
         options={{
           title: "Account",
+          headerShown: false,
           headerRight: () => (
             <TouchableOpacity
               onPress={() => router.push("/msg/messages")}
@@ -140,5 +179,6 @@ export default function TabsLayout() {
         }}
       />
     </Tabs>
+    </ExploreFilterProvider>
   );
 }

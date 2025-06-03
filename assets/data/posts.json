@@ -53,7 +53,7 @@
   {
     "id": "4",
     "image": "samples/balloons",
-    "image_url": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/4.jpg",
+    "image_url": "https://res.cloudinary.com/dozcg1ra4/image/upload/v1748033047/ygbtjvbtftef9xelmmpn.jpg",
     "caption": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic repellendus unde blanditiis. Eos fugiat dolorem ea fugit aut sapiente corrupti autem dolores deleniti architecto, omnis, amet unde dignissimos quam minima?",
     "user": {
       "id": "u1",

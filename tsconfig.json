@@ -21,5 +21,5 @@
     "src/app/(tabs)/Events.js",
     "src/config/firebaseConfig.js",
     "nativewind-env.d.ts"
-  ]
+, "src/app/SignUp.tsx"  ]
 }

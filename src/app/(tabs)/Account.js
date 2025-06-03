@@ -4,10 +4,10 @@ import { View, Text, Image, TouchableOpacity, ScrollView, Pressable } from 'reac
 import posts from "../../../assets/data/posts.json";
 import { useRouter } from "expo-router";
 import { auth } from '../../Firebase';
-import { TextInput } from 'react-native';
+import { Keyboard, TouchableWithoutFeedback, KeyboardAvoidingView, Platform, TextInput } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
-
-
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 
 const AddModForm = ({ mods, setMods }) => {
@@ -70,14 +70,28 @@ const ProfileScreen = () => {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-black">
-    <Pressable
+
+<SafeAreaView className="flex-1 bg-black">
+  <TouchableWithoutFeedback
+    onPress={() => {
+      Keyboard.dismiss(); //dismiss keyboard too
+      if (dropdownVisible) {
+        setDropdownVisible(false);
+        setIsEditingMods(false);
+      }
+    }}
+  >
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       style={{ flex: 1 }}
-      onPress={() => dropdownVisible && setDropdownVisible(false)} // Close dropdown on outside press
     >
-      <ScrollView className="flex-1 bg-black px-2 pt-4">
-        {/* Header with Dropdown */}
-        <View className="flex-row justify-between items-center mb-4">
+      <ScrollView
+  contentContainerStyle={{ flexGrow: 1, paddingTop: 16, paddingHorizontal: 8 }}
+  keyboardShouldPersistTaps="handled"
+  className='bg-black'
+>
+         {/* Header with Dropdown */}
+        <View className="flex-row justify-between items-center mb-2">
           <Text className="color-secondary text-xl font-bold">abe</Text>
 
           <View>
@@ -102,10 +116,10 @@ const ProfileScreen = () => {
         </View>
 
         {/* Profile Section */}
-        <View className="flex-row items-center mb-4">
+        <View className="flex-row items-center mb-2">
           <Image
             source={{ uri: "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/2.jpg" }}
-            className="w-[100px] h-[100px] rounded-full mr-4"
+            className="w-[80px] h-[80px] rounded-full mr-4"
           />
           <View className="flex-1">
             <View className="flex-row justify-between">
@@ -124,13 +138,13 @@ const ProfileScreen = () => {
             </View>
 
             <View className="flex-row mt-2">
-              <TouchableOpacity className="bg-blue-500 px-8 py-3  ml-9 mr-4" 
+              <TouchableOpacity className="bg-blue-500 px-8 py-3  ml-9 mr-9" 
               style={{
             borderRadius: 15,
             alignSelf: 'center',
             marginBottom: 16,
                 }}>
-                <Text className="text-white font-semibold">Add</Text>
+                <FontAwesome5 name="plus" size={20} color="white" />
               </TouchableOpacity>
               <TouchableOpacity className="border border-gray-400 px-8 py-3"
                 style={{
@@ -139,7 +153,11 @@ const ProfileScreen = () => {
                   marginBottom: 16,
                 }}
               >
-                <Text className="text-secondary font-semibold">Message</Text>
+                <MaterialCommunityIcons
+                name="message-outline"
+                size={20}
+                color="white"
+              />
               </TouchableOpacity>
             </View>
           </View>
@@ -207,8 +225,9 @@ const ProfileScreen = () => {
   </View>
 </View>
       </ScrollView>
-    </Pressable>
-    </SafeAreaView>
+    </KeyboardAvoidingView>
+  </TouchableWithoutFeedback>
+</SafeAreaView>
   );
 };
 

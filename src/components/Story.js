@@ -7,7 +7,7 @@ export default function StoryListItem({ story, onPress }) {
         {/* Story Image */}
         <Image
           source={{ uri: story.image_url }}
-          className="w-20 h-24 rounded-md border-0 border-blue-500"
+          className="w-20 h-20 rounded-full border-0 border-blue-500"
         />
         <Text className="text-secondary mt-1 text-xs">{story.user.username}</Text>
       </View>

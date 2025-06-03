@@ -1,13 +1,10 @@
 import { View, Text, Image, TouchableOpacity, Dimensions } from "react-native";
 import { useState } from "react";
 import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
 
 const screenHeight = Dimensions.get("window").height;
 
 export default function PostListItem({ post }) {
-  const router = useRouter();
-  const [expanded, setExpanded] = useState(false);
 
   const handleLike = () => console.log("Like");
   const handleComment = () => console.log("Comment");
@@ -19,28 +16,15 @@ export default function PostListItem({ post }) {
   return (
     <View className="bg-black flex-1">
       {/* Header */}
-      <View className="absolute top-12 left-4 flex-row items-center z-10">
+      <View className="absolute top-24 left-2 flex-row items-center z-10">
         <Image
           source={{ uri: post.user.image_url }}
-          className="w-14 h-14 rounded-full"
+          className="w-11 h-11 rounded-full"
         />
-        <Text className="text-white font-bold ml-2 text-2xl"> 
+        <Text className="text-white font-semibold ml-1 text-xl"> 
           {post.user.username}
         </Text>
       </View>
-
-      {/* Feed Button */}
-      <View className="absolute top-14 right-5 z-10">
-      <TouchableOpacity
-              onPress={() => router.push('/Feed')}
-              style={{ marginLeft: 10 }}
-            >
-              <Text className= "text-blue-400 text-2xl font-bold justify-around items-center bg-white/15 rounded-2xl px-2 py-1">
-                Feed
-              </Text>
-            </TouchableOpacity>
-      </View>
-
 
       {/* Media */}
       <Image

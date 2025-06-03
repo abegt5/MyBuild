@@ -90,13 +90,11 @@ export default function AddPostScreen() {
     <GestureHandlerRootView className="flex-1 bg-black">
       <ScrollView contentContainerStyle={{ padding: 16 }} className="flex-grow">
         <View className="items-center">
-
-        <View className="flex-row justify-around items-center bg-white/15 rounded-2xl px-3 py-2"> {/* button to choose post type */}
+        {/* button to choose post type */}
+        <View className="flex-row justify-around items-center bg-white/15 rounded-2xl px-3 py-2"> 
 
           <TouchableOpacity onPress={() => setPostType('feed')} className="items-center mx-2">
             <Text className="text-white text-lg font-semibold">Garage</Text> </TouchableOpacity>
-
-          <Text className="text-white text-lg font-semibold">|</Text>
 
             <TouchableOpacity onPress={handlePost} className="items-center mx-2">
             <Text className="text-white text-lg font-semibold">Explore</Text> </TouchableOpacity>
