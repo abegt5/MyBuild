@@ -4,14 +4,14 @@ import EventCard from "../../components/EventCard"; // Import your EventCard com
 
 const events = [
   {
-    date: "2025-05-15T18:30:00Z",
-    location: "Central Park, NY",
-    backgroundImage: "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/1.jpg",
+    date: "2025-06-15T18:30:00Z",
+    location: "Bothell, WA",
+    backgroundImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeDkFHHwYV0t_WPV8pAYcP6iG9i0GlH8T7TQ&s",
   },
   {
-    date: "2025-06-10T14:00:00Z",
-    location: "Brooklyn Bridge Park, NY",
-    backgroundImage: "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/2.jpg",
+    date: "2025-06-19T14:00:00Z",
+    location: "Green Lake, WA",
+    backgroundImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1LSbZZ5UaDdWWMzfwD-R5ccsF--7s23DLrQ&s",
   },
   {
     date: "2025-07-04T16:00:00Z",

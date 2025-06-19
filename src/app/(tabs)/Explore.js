@@ -12,20 +12,61 @@ export default function ExploreScreen() {
   const router = useRouter();
 
   // Fetch or simulate posts
-  const fetchPosts = async () => {
-    // Replace this with your API call
-    const newPosts = Array.from({ length: 10 }, (_, i) => ({
-      id: `${posts.length + i}`,
-      image_url: "https://res.cloudinary.com/dozcg1ra4/image/upload/v1747797073/tdnvxrdnpypmgmxrjzar.jpg", // Placeholder
-      caption: "This is a cool post caption that goes on...",
-      stats: { likes: 1240, comments: 48, shares: 20, bookmarks: 10 },
-      user: {
-        username: `user${posts.length + i}`,
-        image_url: "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/2.jpg"
-      }
-    }));
-    setPosts(prev => [...prev, ...newPosts]);
-  };
+ const samplePosts = [
+  {
+    id: "1",
+    image_url: "https://res.cloudinary.com/dozcg1ra4/image/upload/v1747795861/fdybh1toyb60ewpohloh.jpg",
+    caption: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic repellendus unde blanditiis. Eos fugiat dolorem ea fugit aut sapiente corrupti autem dolores deleniti architecto, omnis, amet unde dignissimos quam minima?",
+    stats: { likes: 1234, comments: 12, shares: 5, bookmarks: 0 },
+    user: {
+      username: "Abe",
+      image_url: "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/2.jpg",
+    },
+  },
+  {
+    id: "2",
+    image_url: "https://res.cloudinary.com/dozcg1ra4/image/upload/v1747796353/odtwfmbfjxwmg7sjwfs9.jpg",
+    caption: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic repellendus unde blanditiis. Eos fugiat dolorem ea fugit aut sapiente corrupti autem dolores deleniti architecto, omnis, amet unde dignissimos quam minima?",
+    stats: { likes: 123, comments: 12, shares: 5, bookmarks: 0 },
+    user: {
+      username: "badimnotjustdev",
+      image_url: "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/2.jpg",
+    },
+  },
+  {
+    id: "3",
+    image_url: "https://res.cloudinary.com/dozcg1ra4/image/upload/v1747797073/tdnvxrdnpypmgmxrjzar.jpg",
+    caption: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic repellendus unde blanditiis. Eos fugiat dolorem ea fugit aut sapiente corrupti autem dolores deleniti architecto, omnis, amet unde dignissimos quam minima?",
+    stats: { likes: 123, comments: 12, shares: 5, bookmarks: 0 },
+    user: {
+      username: "vadimnotjustdev",
+      image_url: "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/3.jpg",
+    },
+  },
+  {
+    id: "4",
+    image_url: "https://res.cloudinary.com/dozcg1ra4/image/upload/v1748033047/ygbtjvbtftef9xelmmpn.jpg",
+    caption: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic repellendus unde blanditiis. Eos fugiat dolorem ea fugit aut sapiente corrupti autem dolores deleniti architecto, omnis, amet unde dignissimos quam minima?",
+    stats: { likes: 0, comments: 0, shares: 0, bookmarks: 0 },
+    user: {
+      username: "vadimnotjustdev",
+      image_url: "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/4.jpg",
+    },
+  },
+];
+
+const fetchPosts = async () => {
+  const newPosts = samplePosts.map((post, i) => ({
+    id: `${posts.length + i + 1}`,
+    image_url: post.image_url,
+    caption: post.caption,
+    stats: post.stats,
+    user: post.user,
+  }));
+
+  setPosts(prev => [...prev, ...newPosts]);
+};
+
 
   useEffect(() => {
     fetchPosts();

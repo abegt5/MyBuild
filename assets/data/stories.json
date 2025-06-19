@@ -53,7 +53,7 @@
     {
       "id": "4",
       "image": "samples/balloons",
-      "image_url": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/4.jpg",
+      "image_url": "https://res.cloudinary.com/dozcg1ra4/image/upload/v1747796353/odtwfmbfjxwmg7sjwfs9.jpg",
       "caption": "Up, up, and away 🎈✨",
       "user": {
         "id": "u4",

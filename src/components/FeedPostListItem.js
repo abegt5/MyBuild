@@ -5,9 +5,12 @@ import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
 export default function PostListItem({ post }) {
   // destruct post prop passed in
   const [expanded, setExpanded] = useState(false); // State to track if the caption is expanded
+  const [liked, setLiked] = useState(false);
+  const [bookmarked, setBookmarked] = useState(false);
   const handleLike = () => {
     // Handle the like action here
     console.log("Post liked!");
+    setLiked(!liked);
   };
   const handleComment = () => {
     // Handle the comment action here
@@ -20,6 +23,7 @@ export default function PostListItem({ post }) {
   const handleBookmark = () => {
     // Handle the bookmark action here
     console.log("Post bookmarked!");
+    setBookmarked(!bookmarked);
   }
   const formatNumber = (num) => {
     if (num >= 1000) {
@@ -41,7 +45,7 @@ export default function PostListItem({ post }) {
 
         {/*bookmark icon*/}
         <TouchableOpacity onPress={handleBookmark} className="ml-auto">
-        <Feather name="bookmark" size={24} color= "white"  />
+        <Feather name="bookmark" size={24} color= {bookmarked ? 'blue' : 'white'}  />
         </TouchableOpacity>
   
       </View>
@@ -59,7 +63,7 @@ export default function PostListItem({ post }) {
   <View className="absolute bottom-0 left-0 right-0 p-1 flex-row gap-4 bg-transparent justify-center "> 
     
     <TouchableOpacity onPress={handleLike} className="flex-row gap-1.5">
-      <AntDesign name="hearto" size={24} color="white" />
+       <AntDesign name="hearto" size={24} color={liked ? 'pink' : 'white'} />
       {/* Post stats */}
       {post.stats.likes > 0 && (
         <Text className="text-secondary self-center">{formatNumber(post.stats.likes)}</Text>
