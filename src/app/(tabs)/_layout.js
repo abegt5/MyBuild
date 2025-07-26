@@ -111,7 +111,14 @@ export default function TabsLayout() {
           title: "Add Post",
           tabBarIcon: ({ color }) => (
             <Ionicons name="add-circle-outline" size={24} color={color} />
-          ),
+          ), headerStyle: {
+             backgroundColor: '#11111', // background color of the header
+             borderBottomWidth: 1,
+             borderBottomColor: '#1111', 
+            },
+            headerTitleStyle: {
+              color: '#000', // 🌊 Text color of the header
+            },
         }}
       />
       <Tabs.Screen

@@ -7,16 +7,26 @@ import {
   Text,
   TextInput,
   FlatList,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useRouter } from "expo-router";
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 import { auth, db } from "../../Firebase"; // adjust the path if needed
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
+{/* 
+TODO
+- when keyboard is open, scroll up to show the input field 
+- combine the flatlist and the tapable add post button together
+*/}
+
 
 export default function AddPostScreen() {
+  const tabBarHeight = useBottomTabBarHeight();
   const [mediaItems, setMediaItems] = useState([]);
   const [caption, setCaption] = useState("");
   const [hasChosen, setHasChosen] = useState(false);
@@ -104,23 +114,30 @@ export default function AddPostScreen() {
 
   return (
     <GestureHandlerRootView className="flex-1 bg-black">
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"} // Use "position" if padding doesn't work
+      keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 0} // Adjust depending on your header/nav height
+    >
       <ScrollView
-        contentContainerStyle={{ padding: 16 }}
-        className="flex-grow bg-black"
+       keyboardShouldPersistTaps="handled" // tap isnt lost, will close keyboard and allows buttons to work
+        contentContainerStyle={{ padding: 18, paddingBottom: tabBarHeight + 20 }}
+        className="flex-grow bg-[#F2F2F7]"
       >
         <View className="items-center ">
           {/* button to choose post type */}
-          <View className="flex-row justify-around items-center bg-white/15 rounded-2xl px-3 py-2">
+          {/* TODO: change width and height of this but make it so its based on device */}
+          <View className="flex-row justify-around items-center bg-primary/15 rounded-2xl px-14 py-3">
             {/* Garage Button */}
             <TouchableOpacity
               onPress={() => setPostType("feed")}
-              className={`items-center mx-2 px-4 py-1 rounded-xl ${
-                postType === "feed" ? "bg-[#4C89D9]" : ""
+              className={`items-center mx-2 px-6 py-2 rounded-xl ${
+                postType === "feed" ? "bg-secondary" : ""
               }`}
             >
               <Text
-                className={`text-lg font-semibold ${
-                  postType === "feed" ? "text-white" : "text-white/60"
+                className={`text-xl font-semibold ${
+                  postType === "feed" ? "text-primary" : "text-primary/60"
                 }`}
               >
                 Garage
@@ -130,13 +147,13 @@ export default function AddPostScreen() {
             {/* Explore Button */}
             <TouchableOpacity
               onPress={() => setPostType("explore")}
-              className={`items-center mx-1 px-3 py-1 rounded-xl ${
-                postType === "explore" ? "bg-[#4C89D9]" : ""
+              className={`items-center mx-1 px-6 py-2 rounded-xl ${
+                postType === "explore" ? "bg-secondary" : ""
               }`}
             >
               <Text
-                className={`text-lg font-semibold ${
-                  postType === "explore" ? "text-white" : "text-white/60"
+                className={`text-xl font-semibold ${
+                  postType === "explore" ? "text-primary" : "text-primary/60"
                 }`}
               >
                 Explore
@@ -144,11 +161,21 @@ export default function AddPostScreen() {
             </TouchableOpacity>
           </View>
 
+
           <TouchableOpacity
             onPress={pickMediaItems}
-            className={`w-full ${hasChosen ? "h-0" : "h-96"}  bg-blue-300/20 rounded-lg items-center justify-center mt-2 mb-2 `}
+            className={`w-full ${hasChosen ? "h-0" : "h-96"}  bg-[#1C1C1E] rounded-lg items-center justify-center mt-8 mb-2 border-dashed border-2 border-gray-500`}
           >
-            <Text className="text-white text-3xl font-bold">+</Text>
+          <View style={{width: 50,height: 50,borderRadius: 8,backgroundColor: '#D9D9D9', justifyContent: 'center',alignItems: 'center',}}>
+            <Text className="text-white text-4xl font-regular">+</Text>
+          </View>
+
+            <Text className="text-white text-xl font-bold mt-2">
+              Add Photo/Video
+            </Text>
+            <Text className="text-gray-400 text-sm font-regular mt-1">
+              Tap to select from gallery
+            </Text>
           </TouchableOpacity>
 
           <FlatList
@@ -174,12 +201,12 @@ export default function AddPostScreen() {
           />
 
           <View className="w-full">
-            <Text className="text-lg font-semibold text-white mb-2 text-start">
+            <Text className="text-xl font-bold text-primary mb-2 text-start">
               Caption
             </Text>
             <TextInput
-              className="border border-gray-400 rounded-lg bg-gray-100 p-2 text-black h-24"
-              placeholder="Type caption here..."
+              className="border border-gray-400 rounded-lg bg-gray-100 p-2 text-black h-36"
+              placeholder="Share details about your post"
               multiline
               value={caption}
               onChangeText={setCaption}
@@ -188,7 +215,7 @@ export default function AddPostScreen() {
 
           <TouchableOpacity
             onPress={handlePost}
-            className="w-[30%] bg-[#4C89D9] p-4 rounded-lg mb-4 mt-12"
+            className="w-[30%] bg-[#007AFF] p-4 rounded-lg mb-4 mt-12"
           >
             <Text className="text-white text-center font-semibold text-lg">
               Post
@@ -196,6 +223,7 @@ export default function AddPostScreen() {
           </TouchableOpacity>
         </View>
       </ScrollView>
+      </KeyboardAvoidingView>
     </GestureHandlerRootView>
   );
 }
