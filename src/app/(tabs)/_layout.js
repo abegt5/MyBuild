@@ -6,6 +6,7 @@ import { useRouter, useSegments } from "expo-router";
 import { ExploreFilterProvider } from '../../context/ExploreFilterContext';
 import { useExploreFilter } from '../../context/ExploreFilterContext';
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5"
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function TabsLayout() {
   const segments = useSegments();
@@ -43,6 +44,7 @@ export default function TabsLayout() {
 }
   const router = useRouter();
   return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
         <ExploreFilterProvider>
     <Tabs
       screenOptions={{
@@ -187,5 +189,6 @@ export default function TabsLayout() {
       />
     </Tabs>
     </ExploreFilterProvider>
+    </GestureHandlerRootView>
   );
 }
