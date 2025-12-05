@@ -23,6 +23,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
+// TODO: show mod should change based on car currently selected.
+// animate the change from plus to check
+
 const AddModForm = ({ mods, setMods }) => {
   const [input, setInput] = useState("");
 
@@ -88,8 +91,8 @@ const ProfileScreen = () => {
     setIsFollowing(!isFollowing);
   };
   const [username, setUsername] = useState(null);
-const [loading, setLoading] = useState(true);
-useEffect(() => {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
     const fetchUsername = async () => {
       try {
         const user = auth.currentUser;
@@ -118,7 +121,7 @@ useEffect(() => {
 
     fetchUsername();
   }, []);
-[]
+  [];
 
   return (
     <SafeAreaView className="flex-1 bg-black">
@@ -146,12 +149,13 @@ useEffect(() => {
           >
             {/* Header with Dropdown */}
             <View className="flex-row justify-between items-center mb-2">
-            {username ? (
-        <Text className="color-secondary text-xl font-bold">{username}</Text>
-      ) : (
-        <Text>...</Text>
-      )}
-              
+              {username ? (
+                <Text className="color-secondary text-xl font-bold">
+                  {username}
+                </Text>
+              ) : (
+                <Text>...</Text>
+              )}
 
               <View>
                 <TouchableOpacity
@@ -304,21 +308,25 @@ useEffect(() => {
 
             {/* Posts */}
             <View className="mb-10 items-center">
-  <Text className="font-bold text-lg mb-2 text-secondary">
-    Posts
-  </Text>
-  <View className="flex-row flex-wrap gap-2 justify-between">
-    {posts.map((post, idx) => (
-      <TouchableOpacity key={idx} onPress={() => route.push('/Feed')} className="w-[48%] mb-2">
-        <Image
-          source={{ uri: post.image_url }}
-          className="h-40 rounded"
-          resizeMode="cover"
-        />
-      </TouchableOpacity>
-    ))}
-  </View>
-</View>
+              <Text className="font-bold text-lg mb-2 text-secondary">
+                Posts
+              </Text>
+              <View className="flex-row flex-wrap gap-2 justify-between">
+                {posts.map((post, idx) => (
+                  <TouchableOpacity
+                    key={idx}
+                    onPress={() => route.push("/Feed")}
+                    className="w-[48%] mb-2"
+                  >
+                    <Image
+                      source={{ uri: post.image_url }}
+                      className="h-40 rounded"
+                      resizeMode="cover"
+                    />
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </View>
           </ScrollView>
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>

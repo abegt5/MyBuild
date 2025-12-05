@@ -24,6 +24,7 @@ import { Alert } from "react-native";
 TODO
 - combine the flatlist and the tapable add post button together
 - dark mode / light mode
+- cloudinary should be signed instead of unsigned 
 */
 }
 

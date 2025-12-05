@@ -1,7 +1,8 @@
 // firebase.js
+//before deploying app make sure read and write rules to database is established well
 import { initializeApp } from "firebase/app";
 import { initializeAuth, getReactNativePersistence } from "firebase/auth";
-import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
+import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -10,7 +11,7 @@ const firebaseConfig = {
   projectId: "mybuild-cc484",
   storageBucket: "mybuild-cc484.firebasestorage.app",
   messagingSenderId: "213784172169",
-  appId: "mybuild-cc484"
+  appId: "mybuild-cc484",
 };
 
 const app = initializeApp(firebaseConfig);
@@ -23,4 +24,3 @@ const auth = initializeAuth(app, {
 const db = getFirestore(app);
 
 export { auth, db };
-
