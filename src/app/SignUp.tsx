@@ -1,13 +1,17 @@
-// TODO: Add a "forgot password" feature
-// TODO: translte auth error messages and add to ui. let user see missing requirmetns for password.
-// show missing requirments for password as a list
+// TODO: Add a "forgot password" feature. almost done
+// TODO: translte auth error messages and add to ui. almost done
+// show missing requirments for password as a list.  need to start
+// TODO: put away keyboard when clicking away32
+// TODO: after entering password, user should be able to sing in by pressing enter. Done
+// TODO: ENTER takes you to next field, Done
 
-import React, { useState } from "react";
-import { View } from "react-native";
+import React, { useState, useRef } from "react";
+import { TextInput, View } from "react-native";
 import { auth } from "../Firebase"; // make sure this path is correct
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { router } from "expo-router";
 
@@ -33,6 +37,10 @@ export default function AuthScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [forgotpassword, setForgotPassword] = useState(false);
+  const passwordRef = useRef<TextInput | null>(null);
+  const emailRef = useRef<TextInput | null>(null);
 
   const handleSignUp = async () => {
     /*  const authErrorMessages = {
@@ -111,6 +119,22 @@ export default function AuthScreen() {
     }
   };
 
+  const handlePasswordReset = async () => {
+    try {
+      setForgotPassword(true);
+      if (!email) {
+        setError("Please enter your email address.");
+        return;
+      }
+      await sendPasswordResetEmail(auth, email);
+      console.log("Password reset email sent successfully");
+      setSuccess("Password reset email sent successfully");
+      setError("");
+    } catch (error) {
+      console.error("Error sending password reset email:", error);
+    }
+  };
+
   const handleLogIn = async () => {
     const authErrorMessages = (code: string) => {
       switch (code) {
@@ -186,7 +210,9 @@ export default function AuthScreen() {
             >
               <Text
                 className={
-                  tab === "signUp" ? "text-white font-bold" : "text-black"
+                  tab === "signUp"
+                    ? "text-white font-bold text-xl"
+                    : "text-black text-xl"
                 }
               >
                 Sign Up
@@ -200,7 +226,9 @@ export default function AuthScreen() {
             >
               <Text
                 className={
-                  tab === "logIn" ? "text-white font-bold" : "text-black"
+                  tab === "logIn"
+                    ? "text-white font-bold text-xl"
+                    : "text-black text-xl"
                 }
               >
                 Log In
@@ -212,7 +240,9 @@ export default function AuthScreen() {
           <TabsContent value="signUp">
             <Card>
               <CardHeader>
-                <CardTitle>Create an Account</CardTitle>
+                <CardTitle className="text-[#4C89D9]">
+                  Create an Account
+                </CardTitle>
                 <CardDescription>
                   Register with your email and a password.
                 </CardDescription>
@@ -225,36 +255,41 @@ export default function AuthScreen() {
                     placeholder="Your username"
                     value={username}
                     onChangeText={setUsername} // username is not unique chekecked change that
+                    onSubmitEditing={() => emailRef.current?.focus()}
                   />
                 </View>
                 <View className="gap-1">
                   <Label nativeID="email">Email</Label>
                   <Input
-                    id="email"
+                    ref={emailRef}
                     placeholder="your@email.com"
                     value={email}
                     onChangeText={setEmail}
                     keyboardType="email-address"
                     autoCapitalize="none"
+                    onSubmitEditing={() => passwordRef.current?.focus()}
                   />
                 </View>
                 <View className="gap-1">
                   <Label nativeID="password">Password</Label>
                   <Input
-                    id="password"
+                    ref={passwordRef}
                     placeholder="********"
                     value={password}
                     onChangeText={setPassword} // firebase handles checking password for requiremnts
+                    returnKeyType="join"
                     secureTextEntry
                   />
                 </View>
                 {error ? (
                   <Text className="text-red-500 mt-2">{error}</Text>
+                ) : success ? (
+                  <Text className="text-green-500 mt-2">{success}</Text>
                 ) : null}
               </CardContent>
-              <CardFooter>
+              <CardFooter className="items-center justify-center">
                 <Button onPress={handleSignUp} className="bg-[#4C89D9]">
-                  <Text className="text-white">Sign Up</Text>
+                  <Text className="text-white text-lg">Sign Up</Text>
                 </Button>
               </CardFooter>
             </Card>
@@ -264,7 +299,7 @@ export default function AuthScreen() {
           <TabsContent value="logIn">
             <Card>
               <CardHeader>
-                <CardTitle>Log In</CardTitle>
+                <CardTitle className="text-[#4C89D9]">Log In</CardTitle>
                 <CardDescription>
                   Access your account using email and password.
                 </CardDescription>
@@ -279,25 +314,45 @@ export default function AuthScreen() {
                     onChangeText={setEmail}
                     keyboardType="email-address"
                     autoCapitalize="none"
+                    onSubmitEditing={() => passwordRef.current?.focus()}
                   />
                 </View>
                 <View className="gap-1">
                   <Label nativeID="password">Password</Label>
-                  <Input
-                    id="password"
-                    placeholder="Password"
-                    value={password}
-                    onChangeText={setPassword}
-                    secureTextEntry
-                  />
+                  {!forgotpassword && (
+                    <Input
+                      ref={passwordRef}
+                      placeholder="Password"
+                      value={password}
+                      onChangeText={setPassword}
+                      secureTextEntry
+                      onSubmitEditing={handleLogIn}
+                    />
+                  )}
+                  <Button
+                    className="mt-2 bg-[#2d343d]"
+                    onPress={handlePasswordReset}
+                  >
+                    <Text className="text-[#c0cad8] text-md">
+                      Forgot Password
+                    </Text>
+                  </Button>
                 </View>
                 {error ? (
                   <Text className="text-red-500 mt-2">{error}</Text>
+                ) : success ? (
+                  <Text className="text-green-500 mt-2">{success}</Text>
                 ) : null}
               </CardContent>
-              <CardFooter>
-                <Button onPress={handleLogIn} className="bg-[#4C89D9]">
-                  <Text className="text-white">Log In</Text>
+              <CardFooter className="items-center justify-center">
+                <Button
+                  onPress={() => {
+                    if (forgotpassword) setForgotPassword(false);
+                    else if (!forgotpassword) handleLogIn();
+                  }}
+                  className="bg-[#4C89D9] "
+                >
+                  <Text className="text-white text-lg">Log In</Text>
                 </Button>
               </CardFooter>
             </Card>

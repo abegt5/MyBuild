@@ -1,3 +1,5 @@
+// TODO: Why is the signout section slow
+
 import React, { useState, useEffect } from "react";
 import { signOut } from "firebase/auth";
 import {
